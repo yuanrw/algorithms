@@ -1,4 +1,4 @@
-package com.yrw.alogrithms.chapter1;
+package com.yrw.alogrithms.chapter1.hotorcold;
 
 /**
  * 1.4.34 热还是冷 ~lgN
@@ -47,7 +47,8 @@ public class HotOrColdBetter {
     }
 
     public static void main(String[] args) {
-        HotOrCold cold = new HotOrCold();
+        Game game = new Game(10);
+        HotOrCold cold = new HotOrCold(game);
         System.out.println(cold.guessNumber(1, 25));
     }
 }
