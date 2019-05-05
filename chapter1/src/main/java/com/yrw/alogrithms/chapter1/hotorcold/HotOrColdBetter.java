@@ -9,46 +9,60 @@ package com.yrw.alogrithms.chapter1.hotorcold;
  */
 public class HotOrColdBetter {
 
-    //TODO: 错误待修正
+    private Game game;
 
-    private static final int SECRET = 10;
+    public HotOrColdBetter(Game game) {
+        this.game = game;
+    }
 
-    public int guessNumber(int left, int right, int last) {
-        int now = (left + right) / 2;
-        while (!isRight(now) && left < right) {
-            now = left + right - last;
-            if (isHot(last, now)) {
-                if (now < last) {
-                    right = (Math.min(last, right) + now) / 2 + 1;
-                } else {
-                    left = (Math.max(last, left) + now) / 2 + 1;
+    public int guessNumber(int left, int right) {
+        GuessResult result = game.guess(left);
+        if (result.equals(GuessResult.EQUAL)) {
+            return left;
+        }
+
+        while (left <= right) {
+            int last = game.getLast();
+            int now = left + right - last;
+            result = game.guess(now);
+            if (result.equals(GuessResult.BINGO)) {
+                return now;
+            }
+
+            int mid = (left + right) / 2;
+            if (now > last) {
+                switch (result) {
+                    case HOT:
+                        left = mid + 1;
+                        break;
+                    case COLD:
+                        right = mid - 1;
+                        break;
+                    default:
                 }
             } else {
-                if (now < last) {
-                    left = (Math.max(last, left) + now) / 2;
-                } else {
-                    right = (Math.min(last, right) + now) / 2;
+                switch (result) {
+                    case HOT:
+                        right = mid - 1;
+                        break;
+                    case COLD:
+                        left = mid + 1;
+                        break;
+                    default:
                 }
             }
-            last = now;
-        }
-        if (left >= right) {
-            return -1;
-        }
-        return now;
-    }
 
-    private boolean isRight(int n) {
-        return n == SECRET;
-    }
-
-    private boolean isHot(int last, int now) {
-        return (Math.abs(now - SECRET) <= Math.abs(last - SECRET));
+            if (game.guess(mid) == GuessResult.BINGO) {
+                return mid;
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) {
-        Game game = new Game(10);
-        HotOrCold cold = new HotOrCold(game);
-        System.out.println(cold.guessNumber(1, 25));
+        Game game = new Game(97);
+        HotOrColdBetter cold = new HotOrColdBetter(game);
+
+        System.out.println(cold.guessNumber(1, 98));
     }
 }

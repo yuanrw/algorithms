@@ -29,4 +29,8 @@ public class Game {
         int nDur = Math.abs(secret - number);
         return lDur < nDur ? GuessResult.COLD : lDur == nDur ? GuessResult.EQUAL : GuessResult.HOT;
     }
+
+    public int getLast() {
+        return last;
+    }
 }
