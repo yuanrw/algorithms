@@ -1,4 +1,4 @@
-package com.yrw.alogrithms.chapter2;
+package com.yrw.alogrithms.chapter2.section1;
 
 import com.yrw.algorithms.util.StdRandom;
 

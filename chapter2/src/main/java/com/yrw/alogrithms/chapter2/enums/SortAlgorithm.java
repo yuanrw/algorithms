@@ -21,5 +21,10 @@ public enum SortAlgorithm {
     /**
      * 希尔排序
      */
-    SHELLS_SORT;
+    SHELLS_SORT,
+
+    /**
+     * 不交换元素的插入排序
+     */
+    INSERT_SORT_NO_EXCH;
 }
