@@ -2,6 +2,7 @@ package com.yrw.alogrithms.chapter2.section1;
 
 import com.yrw.algorithms.util.StdRandom;
 import com.yrw.alogrithms.chapter2.enums.SortAlgorithm;
+import com.yrw.alogrithms.chapter2.section2.MergeSort;
 import org.apache.commons.lang.time.StopWatch;
 
 /**
@@ -27,6 +28,9 @@ public class SortCompare {
                 break;
             case INSERT_SORT_NO_EXCH:
                 sort = new InsertionX<>();
+                break;
+            case MERGE_SORT:
+                sort = new MergeSort<>();
                 break;
             default:
                 throw new RuntimeException("");

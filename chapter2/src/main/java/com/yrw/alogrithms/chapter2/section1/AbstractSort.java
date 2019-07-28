@@ -37,7 +37,9 @@ public abstract class AbstractSort<T extends Comparable> {
 
     protected void runTest(T[] a) {
         sort(a);
-        assert isSorted(a);
+        if (!isSorted(a)) {
+            throw new RuntimeException("not sorted");
+        }
         show(a);
     }
 }

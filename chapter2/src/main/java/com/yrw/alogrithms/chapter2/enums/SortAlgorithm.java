@@ -26,5 +26,10 @@ public enum SortAlgorithm {
     /**
      * 不交换元素的插入排序
      */
-    INSERT_SORT_NO_EXCH;
+    INSERT_SORT_NO_EXCH,
+
+    /**
+     * 归并排序
+     */
+    MERGE_SORT;
 }
