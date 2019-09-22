@@ -27,8 +27,7 @@ public class Queue<T> {
      * @param item
      */
     public void enqueue(T item) {
-        Node<T> node = new Node<>();
-        node.setItem(item);
+        Node<T> node = new Node<>(item);
 
         Node<T> oldLast = last;
         last = node;
@@ -36,7 +35,7 @@ public class Queue<T> {
         if (isEmpty()) {
             first = last;
         } else {
-            oldLast.setNext(last);
+            oldLast.next = last;
         }
         N++;
     }
@@ -45,9 +44,9 @@ public class Queue<T> {
         if (isEmpty()) {
             return null;
         }
-        T item = first.getItem();
+        T item = first.item;
 
-        first = first.getNext();
+        first = first.next;
         if (isEmpty()) {
             last = null;
         }

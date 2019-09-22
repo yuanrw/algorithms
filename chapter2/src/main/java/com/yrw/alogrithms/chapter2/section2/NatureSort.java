@@ -1,7 +1,5 @@
 package com.yrw.alogrithms.chapter2.section2;
 
-import com.yrw.algorithms.util.StdRandom;
-
 /**
  * 2.2.16
  * Date: 2019-07-28
@@ -47,13 +45,6 @@ public class NatureSort<T extends Comparable> extends MergeSort<T> {
 
     public static void main(String[] args) {
         NatureSort<Integer> natureSort = new NatureSort<>();
-
-        Integer[] a = new Integer[1000];
-        for (int i = 0; i < a.length; i++) {
-            a[i] = i;
-        }
-
-        StdRandom.shuffle(a);
-        natureSort.runTest(a);
+        natureSort.runTest(natureSort.getRandomInteger(1000));
     }
 }

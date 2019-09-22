@@ -25,16 +25,14 @@ public class LinkedRandomQueue<T> implements RandomQueue<T> {
     @Override
     public void enqueue(T item) {
         if (head == null) {
-            head = new Node<>();
-            head.setItem(item);
+            head = new Node<>(item);
         } else {
             Node<T> cur = head;
-            while (cur.getNext() != null) {
-                cur = cur.getNext();
+            while (cur.next != null) {
+                cur = cur.next;
             }
-            Node<T> newNode = new Node<>();
-            newNode.setItem(item);
-            cur.setNext(newNode);
+            Node<T> newNode = new Node<>(item);
+            cur.next = newNode;
         }
         size++;
     }
@@ -44,8 +42,8 @@ public class LinkedRandomQueue<T> implements RandomQueue<T> {
         if (head == null) {
             throw new RuntimeException("empty");
         }
-        if (head.getNext() == null) {
-            T ret = head.getItem();
+        if (head.next == null) {
+            T ret = head.item;
             head = null;
 
             size--;
@@ -55,16 +53,16 @@ public class LinkedRandomQueue<T> implements RandomQueue<T> {
         int i = 1;
         Node<T> cur = head;
         Node<T> pre = cur;
-        while (cur.getNext() != null) {
+        while (cur.next != null) {
             i++;
             pre = cur;
-            cur = cur.getNext();
+            cur = cur.next;
         }
 
         swapRandom(head, cur, i);
 
-        T ret = cur.getItem();
-        pre.setNext(null);
+        T ret = cur.item;
+        pre.next = null;
 
         size--;
         return ret;
@@ -75,28 +73,28 @@ public class LinkedRandomQueue<T> implements RandomQueue<T> {
         if (head == null) {
             throw new RuntimeException("empty");
         }
-        if (head.getNext() == null) {
-            return head.getItem();
+        if (head.next == null) {
+            return head.item;
         }
 
         int index = StdRandom.uniform(size - 1);
 
         Node<T> cur = head;
         while (index-- > 0) {
-            cur = cur.getNext();
+            cur = cur.next;
         }
-        return cur.getItem();
+        return cur.item;
     }
 
     private void swapRandom(Node<T> head, Node<T> end, int size) {
         int index = StdRandom.uniform(size - 1);
         Node<T> cur = head;
         while (index-- > 0) {
-            cur = cur.getNext();
+            cur = cur.next;
         }
-        T temp = cur.getItem();
-        cur.setItem(end.getItem());
-        end.setItem(temp);
+        T temp = cur.item;
+        cur.item = end.item;
+        end.item = temp;
     }
 
     public static void main(String[] args) {

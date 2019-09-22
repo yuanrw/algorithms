@@ -1,7 +1,5 @@
 package com.yrw.alogrithms.chapter2.section1;
 
-import com.yrw.algorithms.util.StdRandom;
-
 /**
  * 2.1.24
  * Date: 2019-07-20
@@ -34,9 +32,6 @@ public class InsertSortWithSentry<T extends Comparable> extends InsertSort<T> {
 
     public static void main(String[] args) {
         InsertSortWithSentry<Integer> insertSort = new InsertSortWithSentry<>();
-
-        Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        StdRandom.shuffle(a);
-        insertSort.runTest(a);
+        insertSort.runTest(insertSort.getRandomInteger(1000));
     }
 }

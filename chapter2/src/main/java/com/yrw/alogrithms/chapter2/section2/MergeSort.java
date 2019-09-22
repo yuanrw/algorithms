@@ -1,6 +1,5 @@
 package com.yrw.alogrithms.chapter2.section2;
 
-import com.yrw.algorithms.util.StdRandom;
 import com.yrw.alogrithms.chapter2.section1.AbstractSort;
 
 /**
@@ -61,10 +60,7 @@ public class MergeSort<T extends Comparable> extends AbstractSort<T> {
     }
 
     public static void main(String[] args) {
-        MergeSort<Integer> insertSort = new MergeSort<>();
-
-        Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        StdRandom.shuffle(a);
-        insertSort.runTest(a);
+        MergeSort<Integer> mergeSort = new MergeSort<>();
+        mergeSort.runTest(mergeSort.getRandomInteger(1000));
     }
 }

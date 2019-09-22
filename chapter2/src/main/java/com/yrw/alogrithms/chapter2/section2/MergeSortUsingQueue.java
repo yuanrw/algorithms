@@ -1,9 +1,7 @@
 package com.yrw.alogrithms.chapter2.section2;
 
-import com.yrw.algorithms.util.StdRandom;
 import com.yrw.alogrithms.chapter2.section1.AbstractSort;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -66,15 +64,6 @@ public class MergeSortUsingQueue<T extends Comparable> extends AbstractSort<T> {
 
     public static void main(String[] args) {
         MergeSortUsingQueue<Integer> mergeSortUsingQueue = new MergeSortUsingQueue<>();
-
-        Integer[] a = new Integer[1000];
-        for (int i = 0; i < 1000; i++) {
-            a[i] = i;
-        }
-        StdRandom.shuffle(a);
-
-        mergeSortUsingQueue.sort(a);
-
-        System.out.println(Arrays.toString(a));
+        mergeSortUsingQueue.runTest(mergeSortUsingQueue.getRandomInteger(1000));
     }
 }

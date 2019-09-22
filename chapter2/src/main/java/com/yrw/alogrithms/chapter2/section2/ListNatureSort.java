@@ -1,134 +1,61 @@
-//package com.yrw.alogrithms.chapter2.section2;
-//
-//import com.yrw.algorithms.util.Node;
-//
-//import java.util.Random;
-//
-///**
-// * 2.2.17
-// * Date: 2019-07-28
-// * Time: 18:17
-// *
-// * @author yrw
-// */
-//public class ListNatureSort<T extends Comparable> {
-//
-//    public void sort(Node<T> head) {
-//        Node<T> lo = head, hi = head, mid = head, pre = null;
-//
-//        while (lo != head || mid.getNext() != null) {
-//            lo = mid = hi = head;
-//            while (mid.getNext() != null && mid.getNext().getNext() != null &&
-//                hi.getNext() != null && hi.getNext().getNext() != null) {
-//
-//                print(head);
-//
-//                //找到第一个有序链表
-//                while (mid.getNext() != null && mid.getNext().getNext() != null &&
-//                    mid.getItem().compareTo(mid.getNext().getItem()) < 0) {
-//                    mid = mid.getNext();
-//                }
-//
-//                //如果mid在之后还有数据
-//                if (mid.getNext() != null) {
-//                    hi = mid.getNext();
-//                    //找到第二个有序链表
-//                    while (hi.getNext() != null && hi.getNext().getNext() != null
-//                        && hi.getItem().compareTo(hi.getNext().getItem()) < 0) {
-//                        hi = hi.getNext();
-//                    }
-//
-//                    Node<T> next = hi.getNext();
-//
-//                    Node<T> newHead = merge(lo, mid, hi);
-//
-//                    if (pre == null) {
-//                        head = newHead;
-//                        pre = newHead;
-//                    } else {
-//                        pre.setNext(newHead);
-//                    }
-//
-//                    print(head);
-//
-//                    if (next != null && next.getNext() != null) {
-//                        while (pre.getNext() != next) {
-//                            pre = pre.getNext();
-//                        }
-//                        lo = next;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    /**
-//     * 设置哨兵，方便返回，不需要辅助空间
-//     *
-//     * @param lo
-//     * @param mid
-//     * @param hi
-//     * @return
-//     */
-//    private Node<T> merge(Node<T> lo, Node<T> mid, Node<T> hi) {
-//        Node<T> oldLastNext = hi.getNext();
-//        Node<T> newHead = new Node<>();
-//        Node<T> cur = newHead;
-//
-//        Node<T> i = lo, j = mid.getNext();
-//
-//        mid.setNext(null);
-//
-//        while (i != null && j != hi.getNext()) {
-//            if (i.getItem().compareTo(j.getItem()) < 0) {
-//                cur.setNext(i);
-//                cur = cur.getNext();
-//                i = i.getNext();
-//            } else {
-//                cur.setNext(j);
-//                cur = cur.getNext();
-//                j = j.getNext();
-//            }
-//        }
-//
-//        if (i == null && j != hi.getNext()) {
-//            cur.setNext(j);
-//        } else if (j == hi.getNext() && i != null) {
-//            cur.setNext(i);
-//        }
-//
-//        if (mid.getNext() == null) {
-//            mid.setNext(oldLastNext);
-//        }
-//
-//        return newHead.getNext();
-//    }
-//
-//    private void print(Node<T> head) {
-//        Node<T> pre = head;
-//        while (pre != null) {
-//            System.out.print(pre.getItem() + " ");
-//            pre = pre.getNext();
-//        }
-//        System.out.println();
-//    }
-//
-//    public static void main(String[] args) {
-//        long seed = System.currentTimeMillis();
-//        Random random = new Random(seed);
-//        Node<Integer> head = new Node<>();
-//
-//        Node<Integer> pre = head;
-//        head.setItem((int) (10 * random.nextDouble()));
-//
-//        for (int i = 0; i < 9; i++) {
-//            Node<Integer> newNode = new Node<>();
-//            newNode.setItem((int) (10 * random.nextDouble()));
-//            pre.setNext(newNode);
-//            pre = newNode;
-//        }
-//
-//        ListNatureSort<Integer> listNatureSort = new ListNatureSort<>();
-//        listNatureSort.sort(head);
-//    }
-//}
+package com.yrw.alogrithms.chapter2.section2;
+
+import com.yrw.algorithms.util.Node;
+
+/**
+ * 2.2.17
+ * Date: 2019-09-22
+ * Time: 14:47
+ *
+ * @author yrw
+ */
+public class ListNatureSort<T extends Comparable> {
+
+    public Node<T> sortList(Node<T> head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Node<T> slow = head, fast = head, prev = null;
+        //找到中间位置
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        //把链表断开
+        prev.next = null;
+        Node<T> l1 = sortList(head);
+        Node<T> l2 = sortList(slow);
+
+        return merge(l1, l2);
+    }
+
+    /**
+     * 合并两个有序的链表
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    private Node<T> merge(Node<T> l1, Node<T> l2) {
+        Node<T> head = new Node<>(null);
+        Node<T> p = head;
+        while (l1 != null && l2 != null) {
+            if (l1.item.compareTo(l2.item) < 0) {
+                p.next = l1;
+                l1 = l1.next;
+            } else {
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+        if (l1 != null) {
+            p.next = l1;
+        }
+        if (l2 != null) {
+            p.next = l2;
+        }
+        return head.next;
+    }
+}

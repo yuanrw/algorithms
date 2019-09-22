@@ -1,5 +1,7 @@
 package com.yrw.alogrithms.chapter2.section1;
 
+import com.yrw.algorithms.util.StdRandom;
+
 import java.util.Arrays;
 
 /**
@@ -35,11 +37,24 @@ public abstract class AbstractSort<T extends Comparable> {
         return true;
     }
 
+    protected Integer[] getRandomInteger(int size) {
+        Integer[] a = new Integer[size];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = i;
+        }
+        StdRandom.shuffle(a);
+
+        return a;
+    }
+
     protected void runTest(T[] a) {
+        long start = System.currentTimeMillis();
         sort(a);
+        long time = System.currentTimeMillis() - start;
         if (!isSorted(a)) {
             throw new RuntimeException("not sorted");
         }
         show(a);
+        System.out.println("time: " + time);
     }
 }

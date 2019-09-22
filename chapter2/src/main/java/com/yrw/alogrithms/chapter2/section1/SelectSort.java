@@ -1,7 +1,5 @@
 package com.yrw.alogrithms.chapter2.section1;
 
-import com.yrw.algorithms.util.StdRandom;
-
 /**
  * 选择排序
  * Date: 2019-07-13
@@ -38,9 +36,6 @@ public class SelectSort<T extends Comparable> extends AbstractSort<T> {
 
     public static void main(String[] args) {
         SelectSort<Integer> selectSort = new SelectSort<>();
-
-        Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        StdRandom.shuffle(a);
-        selectSort.runTest(a);
+        selectSort.runTest(selectSort.getRandomInteger(1000));
     }
 }

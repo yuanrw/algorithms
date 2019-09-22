@@ -1,7 +1,5 @@
 package com.yrw.alogrithms.chapter2.section1;
 
-import com.yrw.algorithms.util.StdRandom;
-
 /**
  * Date: 2019-07-13
  * Time: 22:18
@@ -28,10 +26,7 @@ public class ShellsSort<T extends Comparable> extends AbstractSort<T> {
     }
 
     public static void main(String[] args) {
-        ShellsSort<Integer> insertSort = new ShellsSort<>();
-
-        Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        StdRandom.shuffle(a);
-        insertSort.runTest(a);
+        ShellsSort<Integer> shellsSort = new ShellsSort<>();
+        shellsSort.runTest(shellsSort.getRandomInteger(1000));
     }
 }

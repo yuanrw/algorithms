@@ -1,7 +1,5 @@
 package com.yrw.alogrithms.chapter2.section1;
 
-import com.yrw.algorithms.util.StdRandom;
-
 /**
  * 插入排序
  * Date: 2019-07-13
@@ -21,9 +19,6 @@ public class InsertSort<T extends Comparable> extends AbstractSort<T> {
 
     public static void main(String[] args) {
         InsertSort<Integer> insertSort = new InsertSort<>();
-
-        Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        StdRandom.shuffle(a);
-        insertSort.runTest(a);
+        insertSort.runTest(insertSort.getRandomInteger(1000));
     }
 }

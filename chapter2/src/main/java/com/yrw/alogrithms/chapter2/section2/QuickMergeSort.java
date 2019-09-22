@@ -1,7 +1,5 @@
 package com.yrw.alogrithms.chapter2.section2;
 
-import com.yrw.algorithms.util.StdRandom;
-
 /**
  * 2.2.10
  * Date: 2019-07-23
@@ -46,10 +44,7 @@ public class QuickMergeSort<T extends Comparable> extends MergeSort<T> {
     }
 
     public static void main(String[] args) {
-        QuickMergeSort<Integer> insertSort = new QuickMergeSort<>();
-
-        Integer[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        StdRandom.shuffle(a);
-        insertSort.runTest(a);
+        QuickMergeSort<Integer> mergeSort = new QuickMergeSort<>();
+        mergeSort.runTest(mergeSort.getRandomInteger(1000));
     }
 }

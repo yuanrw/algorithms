@@ -9,22 +9,13 @@ package com.yrw.algorithms.util;
  */
 public class Node<T> {
 
-    private T item;
-    private Node<T> next;
+    public T item;
+    public Node<T> next;
 
-    public T getItem() {
-        return item;
+    public Node() {
     }
 
-    public void setItem(T item) {
+    public Node(T item) {
         this.item = item;
-    }
-
-    public Node<T> getNext() {
-        return next;
-    }
-
-    public void setNext(Node<T> next) {
-        this.next = next;
     }
 }
