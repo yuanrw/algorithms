@@ -21,7 +21,7 @@ public class NatureSort<T extends Comparable> extends MergeSort<T> {
                 mid = lo;
 
                 //找到第一个有序数组
-                while (mid < a.length - 1 && a[mid].compareTo(a[mid + 1]) < 0) {
+                while (mid < a.length - 1 && less(a[mid], a[mid + 1])) {
                     mid++;
                 }
 
@@ -29,7 +29,7 @@ public class NatureSort<T extends Comparable> extends MergeSort<T> {
                 if (mid < a.length - 1) {
                     hi = mid + 1;
                     //找到第二个有序数组
-                    while (hi < a.length - 1 && a[hi].compareTo(a[hi + 1]) < 0) {
+                    while (hi < a.length - 1 && less(a[hi], a[hi + 1])) {
                         hi++;
                     }
 

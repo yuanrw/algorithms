@@ -26,7 +26,7 @@ public class SelectSort<T extends Comparable> extends AbstractSort<T> {
         T min = a[start];
         int minIndex = -1;
         for (int i = start + 1; i < a.length; i++) {
-            if (a[i].compareTo(min) < 0) {
+            if (less(a[i], min)) {
                 min = a[i];
                 minIndex = i;
             }

@@ -52,7 +52,7 @@ public class MergeSortUsingQueue<T extends Comparable> extends AbstractSort<T> {
             } else if (q2.isEmpty()) {
                 sortedQueue.offer(q1.poll());
             } else {
-                if (q1.peek().compareTo(q2.peek()) < 0) {
+                if (less(q1.peek(), q2.peek())) {
                     sortedQueue.offer(q1.poll());
                 } else {
                     sortedQueue.offer(q2.poll());
