@@ -1,6 +1,8 @@
 package com.yrw.alogrithms.chapter1;
 
 /**
+ * 状态：dp(m,n)代表剩余m个蛋，未知楼层n层，最坏情况下需要的最少尝试次数
+ * 动态转移方程：dp(m,n)=min{max{dp(m-1,k-1),dp(m,n-k)}|1<=k<=n}
  * Date: 2019-09-29
  * Time: 08:29
  *
