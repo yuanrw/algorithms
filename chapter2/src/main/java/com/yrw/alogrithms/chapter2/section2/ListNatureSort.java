@@ -2,6 +2,8 @@ package com.yrw.alogrithms.chapter2.section2;
 
 import com.yrw.algorithms.util.Node;
 
+import java.util.Random;
+
 /**
  * 2.2.17
  * Date: 2019-09-22
@@ -57,5 +59,51 @@ public class ListNatureSort<T extends Comparable> {
             p.next = l2;
         }
         return head.next;
+    }
+
+    public static <T extends Comparable> boolean isSorted(Node<T> head) {
+        Node<T> last = null;
+
+        Node<T> p = head;
+        while (p != null) {
+            if (last != null && last.item.compareTo(p.item) > 0) {
+                return false;
+            }
+
+            last = p;
+            p = p.next;
+        }
+
+        return true;
+    }
+
+    public static <T> void printList(Node<T> head) {
+        Node<T> p = head;
+        while (p != null) {
+            System.out.print(p.item + " ");
+            p = p.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Node<Integer> head = new Node<>(0);
+
+        Node<Integer> current = head;
+
+        Random random = new Random();
+
+        for (int i = 0; i < 1000; i++) {
+            Node<Integer> node = new Node<>(random.nextInt(1000));
+            current.next = node;
+            current = current.next;
+        }
+
+
+        ListNatureSort<Integer> listNatureSort = new ListNatureSort<>();
+        listNatureSort.sortList(head);
+
+        ListNatureSort.printList(head);
+
+        System.out.println(ListNatureSort.isSorted(head));
     }
 }
