@@ -8,10 +8,14 @@ package com.yrw.alogrithms.chapter3;
  */
 public class BinaryIndexedTree {
 
-    private int n;
-    //维护实时的数组
-    private int[] nums;
-    private int[] binaryTree;
+    private final int n;
+
+    /**
+     * 维护实时的数组
+     */
+    private final int[] nums;
+
+    private final int[] binaryTree;
 
     public BinaryIndexedTree(int[] nums) {
         this.nums = nums;
@@ -27,7 +31,6 @@ public class BinaryIndexedTree {
                 idx += (idx & -idx);
             }
         }
-        System.out.println("over");
     }
 
     public void update(int i, int val) {
@@ -39,6 +42,14 @@ public class BinaryIndexedTree {
             i += i & -i;
         }
         nums[updateIdx] = val;
+    }
+
+    public void add(int i, int delta) {
+        i++;
+        while (i <= n) {
+            binaryTree[i] += delta;
+            i += i & -i;
+        }
     }
 
     public int sumRange(int i, int j) {
@@ -70,37 +81,12 @@ public class BinaryIndexedTree {
         tree.update(0, 9);
         tree.update(3, 8);
 
-        //32
-        System.out.println(tree.sumRange(0, 4));
+        assert tree.sumRange(0, 4) == 32;
 
         tree.update(4, 1);
+        tree.add(3, 1);
 
-        //26
-        System.out.println(tree.sumRange(0, 3));
-        //27
-        System.out.println(tree.sumRange(0,4));
-
-//        tree.update(1, 1);
-//        int[] nums = {1, 3, 5, 0, -2, 100};
-//        BinaryIndexedTree tree = new BinaryIndexedTree(nums);
-
-        //9
-//        System.out.println(tree.sumRange(0, 2));
-//        98
-//        System.out.println(tree.sumRange(3, 5));
-//        106
-//        System.out.println(tree.sumRange(1, 5));
-//
-//        tree.update(1, 2);
-//        tree.update(2, 10);
-//
-//        1
-//        System.out.println(tree.sumRange(0, 0));
-//        13
-//        System.out.println(tree.sumRange(0, 2));
-//        98
-//        System.out.println(tree.sumRange(3, 5));
-//        110
-//        System.out.println(tree.sumRange(1, 5));
+        assert tree.sumRange(0, 3) == 27;
+        assert tree.sumRange(0, 4) == 28;
     }
 }
