@@ -1,13 +1,14 @@
 package com.yrw.alogrithms.chapter2.section2;
 
 /**
+ * 归并的方法，另一种树状数组的方法见 ReversePairs2
  * 2.2.19
  * Date: 2019-09-22
  * Time: 16:50
  *
  * @author yrw
  */
-public class ReversePairs<T extends Comparable> extends MergeSort<T> {
+public class ReversePairs<T extends Comparable<T>> extends MergeSort<T> {
 
     public int countReversePairs(T[] a) {
         if (a == null || a.length <= 1) {
@@ -47,14 +48,13 @@ public class ReversePairs<T extends Comparable> extends MergeSort<T> {
         if (less(a[mid], a[mid + 1])) {
             return 0;
         }
+        System.arraycopy(a, lo, aux, lo, hi - lo + 1);
 
         int cnt = 0;
         int i = lo;
         int j = mid + 1;
 
         int k = lo;
-
-        System.arraycopy(a, lo, aux, lo, hi - lo + 1);
 
         while (i < mid + 1 || j < hi + 1) {
             if (i > mid) {
@@ -75,8 +75,27 @@ public class ReversePairs<T extends Comparable> extends MergeSort<T> {
 
     public static void main(String[] args) {
         ReversePairs<Integer> reversePairs = new ReversePairs<>();
-        Integer[] a = {1, 3, 2, 3, 1};
+        Integer[][] a = {
+            //1
+            {-10, -15},
+            //0
+            {1, 2, 3, 4, 5},
+            //0
+            {1},
+            //5
+            {3, 2, 7, 9, -10},
+            //0
+            {0, 0, 0},
+            //0
+            {Integer.MAX_VALUE},
+            //0
+            {},
+            //6
+            {10, 1, 1, 1, 1, 1, 1}
+        };
 
-        System.out.println(reversePairs.countReversePairs(a));
+        for (Integer[] aa : a) {
+            System.out.println(reversePairs.countReversePairs(aa));
+        }
     }
 }

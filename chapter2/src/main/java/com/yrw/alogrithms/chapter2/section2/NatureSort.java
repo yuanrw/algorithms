@@ -7,7 +7,7 @@ package com.yrw.alogrithms.chapter2.section2;
  *
  * @author yrw
  */
-public class NatureSort<T extends Comparable> extends MergeSort<T> {
+public class NatureSort<T extends Comparable<T>> extends MergeSort<T> {
 
     @Override
     public void sort(T[] a) {

@@ -9,7 +9,7 @@ import com.yrw.alogrithms.chapter2.section1.SelectSort;
  *
  * @author yrw
  */
-public class ImprovedMergeSort<T extends Comparable> extends MergeSort<T> {
+public class ImprovedMergeSort<T extends Comparable<T>> extends MergeSort<T> {
 
     private SelectSort<T> selectSort = new SelectSort<>();
 

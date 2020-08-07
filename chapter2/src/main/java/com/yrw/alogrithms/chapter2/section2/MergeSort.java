@@ -9,7 +9,7 @@ import com.yrw.alogrithms.chapter2.section1.AbstractSort;
  *
  * @author yrw
  */
-public class MergeSort<T extends Comparable> extends AbstractSort<T> {
+public class MergeSort<T extends Comparable<T>> extends AbstractSort<T> {
 
     @Override
     public void sort(T[] a) {

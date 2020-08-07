@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  * @author yrw
  */
-public class ReversePair {
+public class ReversePairs2 {
 
     private int[] a;
     private int[] tree;
@@ -51,28 +51,28 @@ public class ReversePair {
     }
 
     public static void main(String[] args) {
-        ReversePair reversePair = new ReversePair();
+        ReversePairs2 reversePairs2 = new ReversePairs2();
         int[][] a = {
-            //[2, 2, 2 ,2 ,2, 4, 3, 2, 0, 0]
-            {-9, -9, -9, -9, -9, 2, 1, 0, -10, -10},
-            //[0, 1, 1, 2]
-            {5, 2, 6, 1},
-            //[0, 0, 0]
-            {1, 2, 3},
-            //[2, 1, 0]
-            {3, 2, 1},
-            //[0, 0]
-            {1, 1},
-            //[0]
+            //1
+            {-10, -15},
+            //0
+            {1, 2, 3, 4, 5},
+            //0
+            {1},
+            //5
+            {3, 2, 7, 9, -10},
+            //0
+            {0, 0, 0},
+            //0
             {Integer.MAX_VALUE},
-            //[]
+            //0
             {},
-            //[6, 0, 0, 0, 0, 0, 0]
+            //6
             {10, 1, 1, 1, 1, 1, 1}
         };
 
         for (int[] aa : a) {
-            System.out.println(reversePair.reversePairs(aa));
+            System.out.println(reversePairs2.reversePairs(aa));
         }
     }
 }

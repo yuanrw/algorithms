@@ -7,7 +7,7 @@ package com.yrw.alogrithms.chapter2.section2;
  *
  * @author yrw
  */
-public class QuickMergeSort<T extends Comparable> extends MergeSort<T> {
+public class QuickMergeSort<T extends Comparable<T>> extends MergeSort<T> {
 
     /**
      * 快速合并，把a的后半部分逆序copy到aux，可以省去检测某半边是否用尽的代码
