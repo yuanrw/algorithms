@@ -7,7 +7,7 @@ package com.yrw.alogrithms.chapter2.section1;
  *
  * @author yrw
  */
-public class InsertSort<T extends Comparable> extends AbstractSort<T> {
+public class InsertSort<T extends Comparable<T>> extends AbstractSort<T> {
     @Override
     public void sort(T[] a) {
         for (int i = 1; i < a.length; i++) {

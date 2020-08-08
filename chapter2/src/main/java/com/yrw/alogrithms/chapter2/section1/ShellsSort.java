@@ -6,7 +6,7 @@ package com.yrw.alogrithms.chapter2.section1;
  *
  * @author yrw
  */
-public class ShellsSort<T extends Comparable> extends AbstractSort<T> {
+public class ShellsSort<T extends Comparable<T>> extends AbstractSort<T> {
 
     @Override
     public void sort(T[] a) {

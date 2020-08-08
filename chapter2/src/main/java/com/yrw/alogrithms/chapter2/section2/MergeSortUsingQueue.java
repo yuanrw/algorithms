@@ -12,7 +12,7 @@ import java.util.Queue;
  *
  * @author yrw
  */
-public class MergeSortUsingQueue<T extends Comparable> extends AbstractSort<T> {
+public class MergeSortUsingQueue<T extends Comparable<T>> extends AbstractSort<T> {
 
     private Queue<Queue<T>> queues;
 

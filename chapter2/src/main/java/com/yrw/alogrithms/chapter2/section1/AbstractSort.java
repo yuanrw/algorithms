@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  * @author yrw
  */
-public abstract class AbstractSort<T extends Comparable> {
+public abstract class AbstractSort<T extends Comparable<T>> {
 
     public abstract void sort(T[] a);
 
@@ -22,6 +22,10 @@ public abstract class AbstractSort<T extends Comparable> {
 
     protected boolean less(T a, T b) {
         return a.compareTo(b) < 0;
+    }
+
+    protected boolean lessAndEquals(T a, T b) {
+        return a.compareTo(b) <= 0;
     }
 
     protected void show(T[] a) {
@@ -48,9 +52,9 @@ public abstract class AbstractSort<T extends Comparable> {
     }
 
     protected void runTest(T[] a) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         sort(a);
-        long time = System.currentTimeMillis() - start;
+        long time = System.nanoTime() - start;
         if (!isSorted(a)) {
             throw new RuntimeException("not sorted");
         }
