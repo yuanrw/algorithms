@@ -28,7 +28,7 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T> {
         int mid = partition(a, lo, hi);
 
         //切分完毕，对mid左右数组继续切分
-        doSort(a, lo, mid);
+        doSort(a, lo, mid - 1);
         doSort(a, mid + 1, hi);
     }
 
