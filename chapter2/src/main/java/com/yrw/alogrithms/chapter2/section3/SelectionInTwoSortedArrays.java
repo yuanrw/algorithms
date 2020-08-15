@@ -9,6 +9,13 @@ package com.yrw.alogrithms.chapter2.section3;
  */
 public class SelectionInTwoSortedArrays {
 
+    /**
+     * 找到中位数
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         double k = (nums1.length + nums2.length - 1) / 2.0 + 1;
         if (k % 1 == 0) {
