@@ -6,6 +6,7 @@ import com.yrw.alogrithms.chapter2.section1.AbstractSort;
  * 快排：三分法
  * 适用于输入中有很多重复元素的
  * 国旗问题就是这个算法的简单版
+ * 当输入中有很多重复的，quick sort 是O(nlogn), quick3way 是O(n)
  * Date: 2020/8/19
  * Time: 22:38
  *
