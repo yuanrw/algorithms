@@ -48,11 +48,11 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T> {
         while (true) {
             //当心v是数组中最大或者最小的元素
 
-            //找到第一个比v大的数(v不用判断）
+            //找到第一个>=v的数(v不用判断）
             while (i <= hi && less(a[i], v)) {
                 i++;
             }
-            //找到第一个比v小的数
+            //找到第一个<=v的数（如果没有就停留在start）
             //这里可以去掉条件j>lo 因为当j == lo时，a[lo]不可能比自己小
             while (less(v, a[j])) {
                 j--;
