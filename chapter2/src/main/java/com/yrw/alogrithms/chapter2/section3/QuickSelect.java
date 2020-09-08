@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * quick select
- * 利用快排的思想，用分区的方式找出k greatest的元素
+ * 利用快排的思想，用分区的方式找出k th的元素
  * Date: 2020/8/9
  * Time: 10:56
  *
@@ -12,6 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class QuickSelect {
 
+    /**
+     * 快速选择
+     *
+     * @param nums 目标数组
+     * @param k    从小到大第k个元素
+     * @return
+     */
     public int select(int[] nums, int k) {
         k = k - 1;
         shuffle(nums);
@@ -37,12 +44,13 @@ public class QuickSelect {
         int v = a[lo];
         while (true) {
             //找到 >= v的
-            while (i < hi && a[++i] > v) {
-
+            while (a[++i] < v) {
+                if (i == hi) {
+                    break;
+                }
             }
             //找到 <= v的
-            while (a[--j] < v) {
-
+            while (a[--j] > v) {
             }
 
             if (i >= j) {
@@ -78,6 +86,7 @@ public class QuickSelect {
 
         //假设length>=k
         int[][] a = {
+            {0, 0, 0, 0, 0, 0, 0},
             {1, 2, 3, 4, 5},
             {5, 4, 3, 2, -1},
             {100, -100},

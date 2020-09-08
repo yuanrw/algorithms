@@ -41,21 +41,22 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T> {
      * @return 被选中的数字v
      */
     private int partition(T[] a, int lo, int hi) {
-        int i = lo + 1;
-        int j = hi;
+        int i = lo;
+        int j = hi + 1;
 
         T v = a[lo];
         while (true) {
             //当心v是数组中最大或者最小的元素
 
             //找到第一个>=v的数(v不用判断）
-            while (i <= hi && less(a[i], v)) {
-                i++;
+            while (less(a[++i], v)) {
+                if (i == hi) {
+                    break;
+                }
             }
             //找到第一个<=v的数（如果没有就停留在start）
             //这里可以去掉条件j>lo 因为当j == lo时，a[lo]不可能比自己小
-            while (less(v, a[j])) {
-                j--;
+            while (less(v, a[--j])) {
             }
 
             //说明第一个比v小的数在第一个比v大的数的左边，数组已经有序
@@ -80,7 +81,8 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSort<T> {
     }
 
     public static void main(String[] args) {
+        Integer[] a = {0, 0, 0, 0, 0, 0, 0};
         QuickSort<Integer> quickSort = new QuickSort<>();
-        quickSort.runTest(quickSort.getRandomInteger(1000));
+        quickSort.runTest(a);
     }
 }
