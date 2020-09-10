@@ -3,20 +3,17 @@ package com.yrw.alogrithms.chapter2.section4;
 import java.util.Arrays;
 
 /**
- * 基于Binary heap实现的优先队列
- * 队列无法resize
- * 为了方便，id从1开始
  * Date: 2020/9/10
- * Time: 08:18
+ * Time: 18:50
  *
  * @author yrw
  */
-public class PriorityQueue<T extends Comparable<T>> {
+public class MinPriorityQueue<T extends Comparable<T>> {
 
     private final T[] heap;
     private int N;
 
-    public PriorityQueue(int capacity) {
+    public MinPriorityQueue(int capacity) {
         heap = (T[]) new Comparable[capacity + 1];
     }
 
@@ -34,9 +31,9 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     /**
-     * 删掉堆中的最大元素
+     * 删掉堆中的最小元素
      */
-    private T deleteMax() {
+    public T deleteMin() {
         if (N == 0) {
             throw new RuntimeException("empty queue");
         }
@@ -47,12 +44,20 @@ public class PriorityQueue<T extends Comparable<T>> {
         return max;
     }
 
+    public T top() {
+        return heap[1];
+    }
+
     public boolean isEmpty() {
         return N == 0;
     }
 
+    public int size() {
+        return N;
+    }
+
     private void swim(int index) {
-        while (index > 1 && less(heap[index / 2], heap[index])) {
+        while (index > 1 && greater(heap[index / 2], heap[index])) {
             swap(index / 2, index);
             index /= 2;
         }
@@ -62,11 +67,12 @@ public class PriorityQueue<T extends Comparable<T>> {
         //判断有child
         while (2 * index <= N) {
             int j = 2 * index;
-            //和兄弟比较，选择较大的child
-            if (j < N && less(heap[j], heap[j + 1])) {
+            //和兄弟比较，选择较小的child
+            if (j < N && greater(heap[j], heap[j + 1])) {
                 j++;
             }
-            if (!less(heap[index], heap[j])) {
+            //跟较小的交换
+            if (!greater(heap[index], heap[j])) {
                 break;
             }
             swap(index, j);
@@ -80,8 +86,8 @@ public class PriorityQueue<T extends Comparable<T>> {
         heap[idx2] = tmp;
     }
 
-    private boolean less(T a, T b) {
-        return a.compareTo(b) < 0;
+    private boolean greater(T a, T b) {
+        return a.compareTo(b) > 0;
     }
 
     @Override
@@ -90,19 +96,19 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     public static void main(String[] args) {
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(5);
-        priorityQueue.insert(2);
-        priorityQueue.insert(-10);
-        priorityQueue.insert(5);
-        priorityQueue.insert(9);
-        priorityQueue.insert(111);
+        MinPriorityQueue<Integer> minPriorityQueue = new MinPriorityQueue<>(5);
+        minPriorityQueue.insert(2);
+        minPriorityQueue.insert(-10);
+        minPriorityQueue.insert(5);
+        minPriorityQueue.insert(9);
+        minPriorityQueue.insert(111);
 
-        System.out.println(priorityQueue);
+        System.out.println(minPriorityQueue);
 
-        System.out.println(priorityQueue.deleteMax());
-        System.out.println(priorityQueue.deleteMax());
-        System.out.println(priorityQueue.deleteMax());
+        System.out.println(minPriorityQueue.deleteMin());
+        System.out.println(minPriorityQueue.deleteMin());
+        System.out.println(minPriorityQueue.deleteMin());
 
-        System.out.println(priorityQueue);
+        System.out.println(minPriorityQueue);
     }
 }
