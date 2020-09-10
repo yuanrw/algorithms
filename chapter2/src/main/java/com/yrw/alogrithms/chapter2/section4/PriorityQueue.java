@@ -36,15 +36,20 @@ public class PriorityQueue<T extends Comparable<T>> {
     /**
      * 删掉堆中的最大元素
      */
-    private void deleteMax() {
+    private T deleteMax() {
         if (N == 0) {
             throw new RuntimeException("empty queue");
         }
+        T max = heap[1];
         swap(1, N);
         heap[N--] = null;
         sink(1);
+        return max;
     }
 
+    public boolean isEmpty() {
+        return N == 0;
+    }
 
     private void swim(int index) {
         while (index > 1 && less(heap[index / 2], heap[index])) {
@@ -94,9 +99,9 @@ public class PriorityQueue<T extends Comparable<T>> {
 
         System.out.println(priorityQueue);
 
-        priorityQueue.deleteMax();
-        priorityQueue.deleteMax();
-        priorityQueue.deleteMax();
+        System.out.println(priorityQueue.deleteMax());
+        System.out.println(priorityQueue.deleteMax());
+        System.out.println(priorityQueue.deleteMax());
 
         System.out.println(priorityQueue);
     }
