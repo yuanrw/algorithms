@@ -48,6 +48,9 @@ public class MaxPriorityQueue<T extends Comparable<T>> {
     }
 
     public T top() {
+        if (N == 0) {
+            throw new RuntimeException("empty queue");
+        }
         return heap[1];
     }
 

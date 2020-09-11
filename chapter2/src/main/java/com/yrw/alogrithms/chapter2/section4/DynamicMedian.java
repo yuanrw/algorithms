@@ -1,6 +1,7 @@
 package com.yrw.alogrithms.chapter2.section4;
 
 /**
+ * leetcode 295
  * 快速找到中位数
  * Date: 2020/9/10
  * Time: 17:04
@@ -75,5 +76,29 @@ public class DynamicMedian<T extends Comparable<T>> {
         System.out.println(dynamicMedian.deleteMedian());
         System.out.println(dynamicMedian.deleteMedian());
         System.out.println(dynamicMedian.findMedian());
+
+        DynamicMedian<Integer> allEquals = new DynamicMedian<>(100);
+        for (int i = 0; i < 100; i++) {
+            allEquals.insert(5);
+        }
+        System.out.println(allEquals.findMedian());
+        System.out.println(allEquals.deleteMedian());
+
+
+        DynamicMedian<Integer> sortHeap = new DynamicMedian<>(10);
+        for (int i = 0; i < 10; i++) {
+            sortHeap.insert(i);
+        }
+        System.out.println(sortHeap.findMedian());
+
+        DynamicMedian<Integer> reverseSortHeap = new DynamicMedian<>(10);
+        for (int i = 0; i < 10; i++) {
+            reverseSortHeap.insert(10 - i);
+        }
+        System.out.println(reverseSortHeap.findMedian());
+
+        DynamicMedian<Integer> emptyHeap = new DynamicMedian<>(0);
+        System.out.println(emptyHeap.findMedian());
+        System.out.println(emptyHeap.deleteMedian());
     }
 }
