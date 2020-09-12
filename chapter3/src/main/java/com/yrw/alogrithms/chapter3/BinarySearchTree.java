@@ -1,5 +1,8 @@
 package com.yrw.alogrithms.chapter3;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 二叉搜索树的实现
  * Date: 2020/9/12
@@ -18,7 +21,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements ST<K, V> {
 
     private Node<K, V> doPut(Node<K, V> root, K key, V value) {
         if (root == null) {
-            return new Node<>(key, value);
+            return new Node<>(key, value, 1);
         }
 
         if (key.compareTo(root.key) < 0) {
@@ -83,7 +86,19 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements ST<K, V> {
 
     @Override
     public Iterable<K> keys() {
-        return null;
+        //先序遍历树，放到queue里
+        Queue<K> queue = new LinkedList<>();
+        inorder(root, queue);
+        return queue;
+    }
+
+    private void inorder(Node<K, V> root, Queue<K> queue) {
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, queue);
+        queue.offer(root.key);
+        inorder(root.right, queue);
     }
 
     public K maxKey() {
@@ -159,6 +174,65 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements ST<K, V> {
         }
     }
 
+    /**
+     * 找到在二叉树中排名第n的key（从1开始）
+     *
+     * @param n
+     * @return
+     */
+    public K select(int n) {
+        if (n < 1) {
+            throw new IllegalArgumentException("n should be positive");
+        }
+        if (isEmpty()) {
+            throw new RuntimeException("empty tree");
+        }
+        if (root.size < n) {
+            throw new RuntimeException("n too large");
+        }
+
+        Node<K, V> node = doSelect(root, n);
+        assert node != null;
+        return node.key;
+    }
+
+    private Node<K, V> doSelect(Node<K, V> root, int n) {
+        if (root == null) {
+            return null;
+        }
+        if (n < size(root.left) + 1) {
+            return doSelect(root.left, n);
+        } else if (n > size(root.left) + 1) {
+            int rank = n - 1 - size(root.left);
+            return doSelect(root.right, rank);
+        } else {
+            return root;
+        }
+    }
+
+    /**
+     * 找到key在树中的排名
+     *
+     * @param key
+     * @return
+     */
+    public int rank(K key) {
+        return doRank(root, key);
+    }
+
+    private int doRank(Node<K, V> root, K key) {
+        if (root == null) {
+            throw new RuntimeException("not found");
+        }
+        if (key.compareTo(root.key) < 0) {
+            return doRank(root.left, key);
+        } else if (key.compareTo(root.key) > 0) {
+            return doRank(root.right, key) + 1 + size(root.left);
+        } else {
+            return size(root.left) + 1;
+        }
+    }
+
     private static final class Node<K, V> {
         private K key;
         private V value;
@@ -168,9 +242,10 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements ST<K, V> {
 
         private int size;
 
-        public Node(K key, V value) {
+        public Node(K key, V value, int size) {
             this.key = key;
             this.value = value;
+            this.size = size;
         }
 
         public K getKey() {
@@ -232,5 +307,27 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements ST<K, V> {
         System.out.println(tree.floor(3));
         //min
         System.out.println(tree.floor(-100));
+
+        System.out.println("select");
+
+        //min
+        System.out.println(tree.select(1));
+        //-20
+        System.out.println(tree.select(2));
+        //0
+        System.out.println(tree.select(3));
+        //3
+        System.out.println(tree.select(4));
+        //max
+        System.out.println(tree.select(5));
+
+        System.out.println("rank");
+
+        System.out.println(tree.rank(Integer.MIN_VALUE));
+        System.out.println(tree.rank(-20));
+        System.out.println(tree.rank(0));
+        System.out.println(tree.rank(3));
+        System.out.println(tree.rank(Integer.MAX_VALUE));
+
     }
 }
