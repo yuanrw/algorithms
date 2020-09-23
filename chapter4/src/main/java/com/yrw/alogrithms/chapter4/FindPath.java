@@ -14,37 +14,40 @@ import java.util.Iterator;
  *
  * @author yrw
  */
-public class Dfs {
-
-    private Graph g;
+public class FindPath {
 
     private boolean[] marked;
 
-    //保存从s到这个节点路径上的倒数第二个节点
-
+    /**
+     * 保存从s到这个节点路径上的倒数第二个节点
+     */
     private int[] edgeTo;
 
-    //起点
-
+    /**
+     * 起点
+     */
     private final int s;
 
-    public Dfs(Graph g, int s) {
-        this.g = g;
+    public FindPath(Graph g, int s) {
+        if (s > g.vertex() - 1) {
+            throw new RuntimeException("s is not valid");
+        }
         this.s = s;
         this.marked = new boolean[g.vertex()];
         this.edgeTo = new int[g.vertex()];
-        Arrays.fill(edgeTo, -1);
-        marked[s] = true;
 
-        dfs(s);
+        Arrays.fill(edgeTo, -1);
+
+        dfs(g, s);
     }
 
-    private void dfs(int s) {
+    private void dfs(Graph g, int s) {
+        marked[s] = true;
+
         g.adj(s).forEachRemaining(v -> {
             if (!marked[v]) {
-                marked[v] = true;
                 edgeTo[v] = s;
-                dfs(v);
+                dfs(g, v);
             }
         });
     }
@@ -53,7 +56,7 @@ public class Dfs {
      * 返回从s到v是否有路径
      */
     public boolean hasPathTo(int v) {
-        return marked[v];
+        return v > marked.length - 1 || marked[v];
     }
 
     /**
@@ -79,12 +82,24 @@ public class Dfs {
         graph.addEdge(2, 3);
         graph.addEdge(2, 4);
 
-        Dfs dfs = new Dfs(graph, 0);
+        FindPath findPath = new FindPath(graph, 0);
         //false
-        System.out.println(dfs.hasPathTo(1));
+        System.out.println(findPath.hasPathTo(1));
         //true
-        System.out.println(dfs.hasPathTo(2));
+        System.out.println(findPath.hasPathTo(2));
 
-        dfs.pathTo(4).forEachRemaining(i -> System.out.print(i + "-"));
+        findPath.pathTo(4).forEachRemaining(i -> System.out.print(i + "-"));
+        System.out.println();
+
+        graph = new Graph(5);
+        findPath = new FindPath(graph, 4);
+
+        //true
+        System.out.println(findPath.hasPathTo(4));
+        //false
+        System.out.println(findPath.hasPathTo(0));
+
+        findPath.pathTo(4).forEachRemaining(i -> System.out.print(i + "-"));
+        System.out.println();
     }
 }
