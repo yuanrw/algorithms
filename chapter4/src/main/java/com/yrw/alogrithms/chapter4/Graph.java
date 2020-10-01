@@ -71,6 +71,10 @@ public class Graph {
         return adj[v].iterator();
     }
 
+    public int degree(int v) {
+        return adj[v].size();
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph(5);
         graph.addEdge(0, 3);
