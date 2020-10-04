@@ -11,5 +11,11 @@
 
     <artifactId>chapter4</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.yrw.algorihtms</groupId>
+            <artifactId>util</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

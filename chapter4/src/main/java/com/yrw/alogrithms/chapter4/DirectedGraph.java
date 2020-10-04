@@ -5,15 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 无向图
- * 用邻接表存储
- * Date: 2020/9/14
- * Time: 12:48
+ * 有向图，邻接表
+ * Date: 2020/10/4
+ * Time: 17:36
  *
  * @author yrw
  */
-public class Graph {
-
+public class DirectedGraph {
     /**
      * 顶点数目
      */
@@ -21,7 +19,7 @@ public class Graph {
     private int e;
     private final List<Integer>[] adj;
 
-    public Graph(int v) {
+    public DirectedGraph(int v) {
         this.v = v;
         this.adj = new List[v];
         for (int i = 0; i < v; i++) {
@@ -49,15 +47,13 @@ public class Graph {
     }
 
     /**
-     * 连接两个节点
-     * 重复edge当做是平行边
+     * 连接两个节点v->w
      *
      * @param v
      * @param w
      */
     public void addEdge(int v, int w) {
         adj[v].add(w);
-        adj[w].add(v);
         e++;
     }
 
@@ -73,26 +69,5 @@ public class Graph {
 
     public int degree(int v) {
         return adj[v].size();
-    }
-
-    public static void main(String[] args) {
-        Graph graph = new Graph(5);
-        graph.addEdge(0, 3);
-        graph.addEdge(1, 3);
-        graph.addEdge(1, 4);
-
-        System.out.println(graph.vertex());
-        System.out.println(graph.edge());
-
-        graph.addEdge(1, 2);
-        graph.addEdge(3, 4);
-
-        System.out.println(graph.vertex());
-        System.out.println(graph.edge());
-
-        Iterator<Integer> iterator = graph.adj(3);
-        while (iterator.hasNext()) {
-            System.out.print(iterator.next() + " ");
-        }
     }
 }
